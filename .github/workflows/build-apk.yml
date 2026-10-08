@@ -40,7 +40,8 @@ jobs:
         echo '' >> gradle/libs.versions.toml
         echo '[plugins]' >> gradle/libs.versions.toml
         echo 'android-application = { id = "com.android.application", version.ref = "agp" }' >> gradle/libs.versions.toml
-        echo 'kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }' >> gradle/libs.versions.toml
+        echo 'kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }' >> gradle/libs.versions.toml
+        echo 'kotlin-compose = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }' >> gradle/libs.versions.toml
         echo 'google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }' >> gradle/libs.versions.toml
         echo 'secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }' >> gradle/libs.versions.toml
         echo 'google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }' >> gradle/libs.versions.toml
@@ -86,4 +87,3 @@ jobs:
         path: |
           **/build/outputs/apk/debug/*.apk
           **/build/outputs/apk/**/*.apk
-          
