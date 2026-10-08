@@ -21,8 +21,8 @@ class GeminiTtsService(private val context: Context) {
 
     companion object {
         private const val TAG = "GeminiTtsService"
-        const val DEFAULT_MODEL = "gemini-3.1-flash-tts"
-        const val FALLBACK_MODEL = "gemini-2.5-flash-preview-tts"
+        const val DEFAULT_MODEL = "gemini-2.0-flash"
+        const val FALLBACK_MODEL = "gemini-1.5-flash"
         private const val BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/"
     }
 
