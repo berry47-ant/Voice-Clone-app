@@ -1,0 +1,6 @@
+{
+  "name": "Myanmar Voice Clone",
+  "description": "Native Android app for Myanmar voice cloning and text-to-speech using Gemini TTS with recorded voice samples, audio player, and export options.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
