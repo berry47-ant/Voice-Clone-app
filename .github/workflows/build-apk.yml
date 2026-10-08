@@ -16,38 +16,34 @@ jobs:
     - name: Generate Missing Version Catalog
       run: |
         mkdir -p gradle
-        if [ ! -f "gradle/libs.versions.toml" ]; then
-          cat << 'EOF' > gradle/libs.versions.toml
-[versions]
-agp = "8.3.0"
-kotlin = "1.9.22"
-coreKtx = "1.12.0"
-lifecycleRuntimeKtx = "2.7.0"
-activityCompose = "1.8.2"
-composeBom = "2024.02.01"
-ksp = "1.9.22-1.0.17"
-secrets = "2.0.1"
-googleServices = "4.4.1"
-
-[libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
-[plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
-google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
-EOF
-        fi
+        echo '[versions]' > gradle/libs.versions.toml
+        echo 'agp = "8.3.0"' >> gradle/libs.versions.toml
+        echo 'kotlin = "1.9.22"' >> gradle/libs.versions.toml
+        echo 'coreKtx = "1.12.0"' >> gradle/libs.versions.toml
+        echo 'lifecycleRuntimeKtx = "2.7.0"' >> gradle/libs.versions.toml
+        echo 'activityCompose = "1.8.2"' >> gradle/libs.versions.toml
+        echo 'composeBom = "2024.02.01"' >> gradle/libs.versions.toml
+        echo 'ksp = "1.9.22-1.0.17"' >> gradle/libs.versions.toml
+        echo 'secrets = "2.0.1"' >> gradle/libs.versions.toml
+        echo 'googleServices = "4.4.1"' >> gradle/libs.versions.toml
+        echo '' >> gradle/libs.versions.toml
+        echo '[libraries]' >> gradle/libs.versions.toml
+        echo 'androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }' >> gradle/libs.versions.toml
+        echo 'androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }' >> gradle/libs.versions.toml
+        echo 'androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }' >> gradle/libs.versions.toml
+        echo 'androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }' >> gradle/libs.versions.toml
+        echo 'androidx-ui = { group = "androidx.compose.ui", name = "ui" }' >> gradle/libs.versions.toml
+        echo 'androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }' >> gradle/libs.versions.toml
+        echo 'androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }' >> gradle/libs.versions.toml
+        echo 'androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }' >> gradle/libs.versions.toml
+        echo 'androidx-material3 = { group = "androidx.compose.material3", name = "material3" }' >> gradle/libs.versions.toml
+        echo '' >> gradle/libs.versions.toml
+        echo '[plugins]' >> gradle/libs.versions.toml
+        echo 'android-application = { id = "com.android.application", version.ref = "agp" }' >> gradle/libs.versions.toml
+        echo 'kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }' >> gradle/libs.versions.toml
+        echo 'google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }' >> gradle/libs.versions.toml
+        echo 'secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }' >> gradle/libs.versions.toml
+        echo 'google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }' >> gradle/libs.versions.toml
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
