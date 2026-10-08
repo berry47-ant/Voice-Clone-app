@@ -1,0 +1,56 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+
+    - name: Generate Keystore & Correct Google Services Config
+      run: |
+        mkdir -p app
+        keytool -genkey -v -keystore app/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US" || true
+        keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US" || true
+
+        DUMMY_JSON='{
+          "project_info": { "project_number": "123456789012", "project_id": "sample-project", "storage_bucket": "sample-project.appspot.com" },
+          "client": [{
+            "client_info": { "mobilesdk_app_id": "1:123456789012:android:1234567890123456789012", "android_client_info": { "package_name": "com.aistudio.myanmarts.krvfwp" } },
+            "oauth_client": [], "api_key": [{ "current_key": "AIzaSyDummyKeyForBuildOnly" }],
+            "services": { "appinvite_service": { "other_platform_oauth_client": [] } }
+          }],
+          "configuration_version": "1"
+        }'
+        echo "$DUMMY_JSON" > app/google-services.json || true
+        echo "$DUMMY_JSON" > google-services.json || true
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew || true
+
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug --stacktrace || gradle assembleDebug
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: app-debug
+        path: |
+          **/build/outputs/apk/debug/*.apk
+          **/build/outputs/apk/**/*.apk
